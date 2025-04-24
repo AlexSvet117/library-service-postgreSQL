@@ -1,4 +1,6 @@
 from models.book_model import Book
+import psycopg2
+from flask import g, current_app
 
 book1 = Book(
         book_id = "001",
@@ -23,3 +25,7 @@ book2 = Book(
     )
 
 book_data = [book1, book2]
+
+
+def get_db():
+    
