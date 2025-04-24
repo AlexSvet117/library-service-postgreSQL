@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from services.book_service import BookService
 
 
-book_bp = Blueprint("books", __name__, url_prefix="/v2")
+book_bp = Blueprint("books", __name__, url_prefix="/api/v2")
 
 
 @book_bp.route("/books", methods = ["GET"]) 
