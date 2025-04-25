@@ -1,13 +1,17 @@
 from db import book_data
 from models.book_model import Book
 from utils.validator import validate_book_input
+from repositories.book_repository import BookRepository
 
 
 class BookService:
     
     @staticmethod
     def get_all_books():
-        return book_data
+        books = BookRepository.get_all_books()
+        if not books:
+            return []
+        return books
     
     @staticmethod
     def get_book_by_id(book_id :str):
