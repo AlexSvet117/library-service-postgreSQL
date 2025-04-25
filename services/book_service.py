@@ -11,19 +11,17 @@ class BookService:
         books = BookRepository.get_all_books()
         if not books:
             return []
-        return books
+        return [Book(**b) for b in books]
     
     @staticmethod
     def get_book_by_id(book_id :str):
-        for book in book_data:
-            if book.book_id == book_id:
-                return book
-        return None
+        book = BookRepository.get_book_by_id(book_id)
+        return Book(**book) if book else None
     
     @staticmethod
     def create_book(data : dict):
-
         error = validate_book_input(data)
+
         if error:
             return error
 
@@ -39,17 +37,16 @@ class BookService:
             notes = data.get("notes", "")
         )
 
-        book_data.append(new_book)
-        return book_data
+        created_book = BookRepository.create_book(new_book)
+        books = BookRepository.get_all_books()
+        return [Book(**b) for b in books]
 
 
     @staticmethod
     def delete_book(book_id):
-        for book in book_data:
-            if book.book_id == book_id:
-                book_data.remove(book)
-                return True, book_data
-        return False, None
+        deleted = BookRepository.delete_book(book_id)
+        books = BookRepository.get_all_books()
+        return True, [Book(**b) for b in books]
     
 
     @staticmethod

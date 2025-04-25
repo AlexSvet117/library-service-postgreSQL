@@ -1,5 +1,5 @@
 class Book: 
-    def __init__(self, book_id, title, author, publication_year = 0, genre = "", read_status = "to-read", rating = 0.0, notes = ""):
+    def __init__(self, book_id, title, author, publication_year = 0, genre = "", read_status = "to-read", rating = 0.0, notes = "", **kwargs):
         self.book_id = book_id
         self.title = title
         self.author = author
