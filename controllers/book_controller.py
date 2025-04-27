@@ -55,6 +55,8 @@ def update_book(book_id):
     
     return jsonify(updated_book.to_dict())
 
+
+# NOT USED
 @book_bp.route("/books/stats", methods=["GET"])
 def books_stats():
     """
