@@ -51,17 +51,22 @@ class BookService:
 
     @staticmethod
     def update_book(book_id: str, data: dict):
-        book = BookService.get_book_by_id(book_id)
+        book = BookRepository.get_book_by_id(book_id)
         
         if not book:
             return {"error": "Book not found"}
         
-        book.title = data.get("title", book.title)
-        book.author = data.get("author", book.author)
-        book.publication_year = data.get("publication_year", book.publication_year)
-        book.genre = data.get("genre", book.genre)
-        book.read_status = data.get("read_status", book.read_status)
-        book.rating = data.get("rating", book.rating)
-        book.notes = data.get("notes", book.notes)
+        updated_book = Book(
+            book.book_id = data.get("book_id", book_id)
+            book.title = data.get("title", book.title)
+            book.author = data.get("author", book.author)
+            book.publication_year = data.get("publication_year", book.publication_year)
+            book.genre = data.get("genre", book.genre)
+            book.read_status = data.get("read_status", book.read_status)
+            book.rating = data.get("rating", book.rating)
+            book.notes = data.get("notes", book.notes)
+        )
         
-        return book
+        updated_new_book = BookRepository.update_book_by_id(updated_book, book_id)
+        books = BookRepository.get_all_books()
+        return [Book(**b) for b in books]

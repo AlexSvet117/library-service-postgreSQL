@@ -43,3 +43,22 @@ class BookRepository:
             deleted = cursor.fetchone()
             connection.commit()
             return deleted
+        
+    @staticmethod
+    def update_book_by_id(book, book_id):
+        connection = get_db()
+        with connection.cursor(cursor_factory=RealDictCursor) as cursor:
+            cursor.execute("""update books set title = %s, author = %s, publication_year = %s, genre = %s, read_status = %s, rating = %s, notes = %s
+                where book_id = %s
+                returning * 
+                """, (
+                book.title, 
+                book.author, 
+                book.publication_year, 
+                book.genre, 
+                book.read_status, 
+                book.rating, 
+                book.notes,
+                book_id))
+            connection.commit()
+            return cursor.fetchone()
